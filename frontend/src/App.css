@@ -76,6 +76,13 @@
     padding: 20px;
 }
 
+.close-btn {
+    background-color: #A1916F;
+    border: 1px solid black;
+}
+.close-btn:hover {
+    background-color: #D9D4C0 ;
+}
 .open-dic-btn {
     position: fixed;
     bottom: 24px;
@@ -87,35 +94,32 @@
     font-size: 30px;
 }
 .open-dic-btn:hover {
-    background: white;      /* change ltr */
+    background-color: #D9D4C0;
 }
 
 .word-row {
     display: flex;
     align-items: baseline;
-    gap: 8px;
-    padding: 8px 4px;
-    border-bottom: 1px solid black;
+    gap: 23px;
+    padding: 5px 10px;
     cursor: pointer;
-    border-radius: 4px;
     transition: background 0.15s ease;
 }
-.word-row:hover {
-    background: aqua;
-}
 .word-text {
-    font-size: 15px;
-    color: #3a2818;
-    font-style: italic;
+    font-size: 25px;
+    color: black;
+    letter-spacing: 1px;
+
 }
+/* add max width */
 .word-type {
-    font-size: 11px;
-    color: crimson;
-    min-width: 24px;
+    font-size: 30px;
+    color: black;
+    font-family: "Edwardian Script ITC", "Edwardian Script", cursive;
+    margin-left: auto;
 }
 .word-info {
     font-size: 22px;
-    font-style: italic;
     color: #3a2818;
     margin: 4px 0 12px;
 }

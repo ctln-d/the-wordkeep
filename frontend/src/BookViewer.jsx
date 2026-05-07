@@ -6,8 +6,8 @@ import pages from "./pages.js"
 function WordRow({ wordObj, onWordClick }) {
     return (
         <div className="word-row" onClick={() => onWordClick(wordObj)}>
-            <span className="word-type">{wordObj.type}</span>
             <span className="word-text">{wordObj.word}</span>
+            <span className="word-type">{wordObj.type}</span>
         </div>
     )
 }
@@ -40,9 +40,9 @@ function BookViewer({ shiftedLeft, shiftedRight, onWordClick }) {
                 size="fixed"
                 width={542}
                 height={743}
-                minWidth={542}
+                minWidth={1}
                 maxWidth={542}
-                minHeight={743}
+                minHeight={1}
                 maxHeight={743}
                 drawShadow={true}
                 flippingTime={700}

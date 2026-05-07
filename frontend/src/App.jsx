@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import BookViewer from "./BookViewer"
 import "./App.css"
+import SearchBar from "./SearchBar";
 
 function App() {
     const [panelLeftOpen, setPanelLeftOpen] = useState(false)
@@ -21,12 +22,6 @@ function App() {
 
     return (
         <div className="scene">
-            <BookViewer
-                shiftedRight={panelRightOpen}
-                shiftedLeft={panelLeftOpen}
-                onWordClick={handleWordClick}
-            /> {/* when panelOpen is true, BookViewer receives shiftedRight={true} and slides over */}
-
             {/* button to open left panel */}
             {!panelLeftOpen && (
                 <button className="open-dic-btn" onClick={() => setPanelLeftOpen(true)}>
@@ -37,8 +32,15 @@ function App() {
             {/* left panel */}
             <div className={`left-panel ${panelLeftOpen ? 'open' : ''}`}>
                 <button className="close-btn" onClick={() => setPanelLeftOpen(false)}>X</button>
+                <SearchBar />
                 <h3>Dictionary</h3>
             </div>
+
+            <BookViewer
+                shiftedRight={panelRightOpen}
+                shiftedLeft={panelLeftOpen}
+                onWordClick={handleWordClick}
+            /> {/* when panelOpen is true, BookViewer receives shiftedRight={true} and slides over */}
 
             {/* side panel (right?) */}
             <div className={`right-panel ${panelRightOpen ? 'open' : ''}`}>       {/* if panelOpen is true, add the css class 'open', otherwise add nothing */}
