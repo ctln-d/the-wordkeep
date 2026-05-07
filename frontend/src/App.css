@@ -17,14 +17,16 @@
 
 /* slide book */
 .book-wrapper {
+    display: block;
     transition: transform 0.5s ease;
 }
-.book-wrapper.shifted-left {
+.book-wrapper.shiftedLeft {
     transform: translateX(100px);
 }
-.book-wrapper.shifted-right {
+.book-wrapper.shiftedRight {
     transform: translateX(-100px);
 }
+
 
 .page {
     background: #f5f0e0;
@@ -83,6 +85,9 @@
     border: 1px solid black;
     font-family: "Edwardian Script ITC", "Edwardian Script", cursive;
     font-size: 30px;
+}
+.open-dic-btn:hover {
+    background: white;      /* change ltr */
 }
 
 .word-row {

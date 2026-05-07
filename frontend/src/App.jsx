@@ -27,14 +27,21 @@ function App() {
                 onWordClick={handleWordClick}
             /> {/* when panelOpen is true, BookViewer receives shiftedRight={true} and slides over */}
 
+            {/* button to open left panel */}
+            {!panelLeftOpen && (
+                <button className="open-dic-btn" onClick={() => setPanelLeftOpen(true)}>
+                    dictionary
+                </button>
+            )}
+
             {/* left panel */}
-            <div className={`left-panel ${panelRightOpen ? 'open' : ''}`}>
-                <button className="close-btn" onClick{() => setPanelLeftOpen(false)}>X</button>
+            <div className={`left-panel ${panelLeftOpen ? 'open' : ''}`}>
+                <button className="close-btn" onClick={() => setPanelLeftOpen(false)}>X</button>
                 <h3>Dictionary</h3>
             </div>
 
             {/* side panel (right?) */}
-            <div className={`right-panel ${panelRightOpen ? 'open' : ''}`}>       {/* if panelOpen is true, add the class 'open', otherwise add nothing */}
+            <div className={`right-panel ${panelRightOpen ? 'open' : ''}`}>       {/* if panelOpen is true, add the css class 'open', otherwise add nothing */}
                 <button className="close-btn" onClick={handleRightClose}>X</button>
 
                 {selectedWord && (
@@ -46,13 +53,6 @@ function App() {
                     </div>
                 )}
             </div>
-
-            {/* button to open left panel */}
-            {!panelLeftOpen && (
-                <button className="open-dic-btn" onClick={() => setPanelLeftOpen(true)}>
-                    dictionary
-                </button>
-            )}
         </div>
     )
 }

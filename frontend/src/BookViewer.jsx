@@ -2,6 +2,7 @@ import React, { useRef } from "react"
 import HTMLFlipBook from "react-pageflip"
 import pages from "./pages.js"
 
+// move over a bit so page corners won't be in the way
 function WordRow({ wordObj, onWordClick }) {
     return (
         <div className="word-row" onClick={() => onWordClick(wordObj)}>
@@ -55,7 +56,7 @@ function BookViewer({ shiftedLeft, shiftedRight, onWordClick }) {
                 useMouseEvents={true}
                 swipeDistance={30}
                 showPageCorners={true}
-                disableFlipByClick={true}  //test true
+                disableFlipByClick={true}
                 ref={book}
             >
                 {pages.map(page => (
