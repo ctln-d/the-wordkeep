@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'Chopin Script';
+    src: url('assets/fonts/ChopinScript.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 .scene {
     display: flex;
     align-items: center;
@@ -7,11 +15,14 @@
     background: #c8b89a;
 }
 
-/* slide left */
+/* slide book */
 .book-wrapper {
     transition: transform 0.5s ease;
 }
-.book-wrapper.shifted {
+.book-wrapper.shifted-left {
+    transform: translateX(100px);
+}
+.book-wrapper.shifted-right {
     transform: translateX(-100px);
 }
 
@@ -34,7 +45,7 @@
     color: #5a4a30;
 }
 
-.side-panel {
+.left-panel {
     width: 0;
     overflow: hidden;
     opacity: 0;
@@ -43,14 +54,68 @@
     border-radius: 8px;
     padding: 0;
 }
-.side-panel.open {
+.left-panel.open {
+    width: 220px;
+    opacity: 1;
+    padding: 20px
+}
+.right-panel {
+    width: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: width 0.5s ease, opacity 0.4s ease;
+    background: #faf6ec;
+    border-radius: 8px;
+    padding: 0;
+}
+.right-panel.open {
     width: 220px;
     opacity: 1;
     padding: 20px;
 }
 
-.open-btn {
+.open-dic-btn {
     position: fixed;
     bottom: 24px;
-    right: 24px;
+    left: 24px;
+    padding: 10px 22px;
+    background-color: #A1916F;
+    border: 1px solid black;
+    font-family: "Edwardian Script ITC", "Edwardian Script", cursive;
+    font-size: 30px;
+}
+
+.word-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 8px 4px;
+    border-bottom: 1px solid black;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.15s ease;
+}
+.word-row:hover {
+    background: aqua;
+}
+.word-text {
+    font-size: 15px;
+    color: #3a2818;
+    font-style: italic;
+}
+.word-type {
+    font-size: 11px;
+    color: crimson;
+    min-width: 24px;
+}
+.word-info {
+    font-size: 22px;
+    font-style: italic;
+    color: #3a2818;
+    margin: 4px 0 12px;
+}
+.word-definition {
+    font-size: 13px;
+    line-height: 1.8;
+    color: #5a4a30;
 }

@@ -2,21 +2,36 @@ import React, { useRef } from "react"
 import HTMLFlipBook from "react-pageflip"
 import pages from "./pages.js"
 
-const Page = React.forwardRef(({ text }, ref) => {
+function WordRow({ wordObj, onWordClick }) {
+    return (
+        <div className="word-row" onClick={() => onWordClick(wordObj)}>
+            <span className="word-type">{wordObj.type}</span>
+            <span className="word-text">{wordObj.word}</span>
+        </div>
+    )
+}
+
+const Page = React.forwardRef(({ words, onWordClick }, ref) => {
     return (
         <div className="page" ref={ref}>
             <div className="pg-content">
-                <p>{text}</p>
+                {words.map((wordObj, index) => (
+                    <WordRow
+                        key={index}
+                        wordObj={wordObj}
+                        onWordClick={onWordClick}
+                    />
+                ))}
             </div>
         </div>
     )
 })
 
-function BookViewer({ shifted }) {
+function BookViewer({ shiftedLeft, shiftedRight, onWordClick }) {
     const book = useRef()
 
     return (
-        <div className={`book-wrapper ${shifted ? 'shifted' : ''}`}>
+        <div className={`book-wrapper ${shiftedLeft ? 'shiftedLeft' : ''} ${shiftedRight ? 'shiftedRight' : ''}`}>
             <HTMLFlipBook
                 className=""
                 style={{}}
@@ -41,11 +56,14 @@ function BookViewer({ shifted }) {
                 swipeDistance={30}
                 showPageCorners={true}
                 disableFlipByClick={true}  //test true
-                children={null}
                 ref={book}
             >
                 {pages.map(page => (
-                    <Page key={page.id} text={page.text} />
+                    <Page
+                        key={page.id}
+                        words={page.words}
+                        onWordClick={onWordClick}
+                    />
                 ))
                 }
             </HTMLFlipBook>

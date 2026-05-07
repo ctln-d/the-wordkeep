@@ -3,23 +3,54 @@ import BookViewer from "./BookViewer"
 import "./App.css"
 
 function App() {
-    const [panelOpen, setPanelOpen] = useState(false)
+    const [panelLeftOpen, setPanelLeftOpen] = useState(false)
+    const [panelRightOpen, setPanelRightOpen] = useState(false)
+    const [selectedWord, setSelectedWord] = useState(null)
+
+    // runs when a word is clicked
+    // recieves word object
+    function handleWordClick(wordObj) {
+        setSelectedWord(wordObj)    // save clicked word
+        setPanelRightOpen(true)
+    }
+
+    function handleRightClose() {
+        setPanelRightOpen(false)
+        setSelectedWord(null)    // clear word when panel closes
+    }
 
     return (
         <div className="scene">
-            <BookViewer shifted={panelOpen} />     {/* when panelOpen is true, BookViewer receives shifted={true} and slides over */}
+            <BookViewer
+                shiftedRight={panelRightOpen}
+                shiftedLeft={panelLeftOpen}
+                onWordClick={handleWordClick}
+            /> {/* when panelOpen is true, BookViewer receives shiftedRight={true} and slides over */}
 
-            {/* side panel (left?) */}
-            <div className={`side-panel ${panelOpen ? 'open' : ''}`}>       {/* if panelOpen is true, add the class 'open', otherwise add nothing */}
-                <button onClick={() => setPanelOpen(false)}>X Close</button>
+            {/* left panel */}
+            <div className={`left-panel ${panelRightOpen ? 'open' : ''}`}>
+                <button className="close-btn" onClick{() => setPanelLeftOpen(false)}>X</button>
                 <h3>Dictionary</h3>
-                <p>customize this ltr</p>
             </div>
 
-            {/* button to open panel */}
-            {!panelOpen && (
-                <button className="open-btn" onClick={() => setPanelOpen(true)}>
-                    Open Dictionary
+            {/* side panel (right?) */}
+            <div className={`right-panel ${panelRightOpen ? 'open' : ''}`}>       {/* if panelOpen is true, add the class 'open', otherwise add nothing */}
+                <button className="close-btn" onClick={handleRightClose}>X</button>
+
+                {selectedWord && (
+                    <div className="word-info">
+                        {/* inline (takes up as much width as necessary */}
+                        <span className="word-type">{selectedWord.type}</span>
+                        <h2 className="word-title">{selectedWord.word}</h2>
+                        <p className="word-definition">{selectedWord.definition}</p>
+                    </div>
+                )}
+            </div>
+
+            {/* button to open left panel */}
+            {!panelLeftOpen && (
+                <button className="open-dic-btn" onClick={() => setPanelLeftOpen(true)}>
+                    dictionary
                 </button>
             )}
         </div>
