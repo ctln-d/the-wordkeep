@@ -29,7 +29,7 @@
 
 
 .page {
-    background: #f5f0e0;
+    background: #EBE4CF;
     border: 1px solid #d4c9a8;
     box-sizing: border-box;
 }
@@ -52,12 +52,12 @@
     overflow: hidden;
     opacity: 0;
     transition: width 0.5s ease, opacity 0.4s ease;
-    background: #faf6ec;
-    border-radius: 8px;
+    background: #EBE4CF;
     padding: 0;
 }
 .left-panel.open {
-    width: 220px;
+    width: 414px;
+    height: 792px;
     opacity: 1;
     padding: 20px
 }
@@ -66,16 +66,29 @@
     overflow: hidden;
     opacity: 0;
     transition: width 0.5s ease, opacity 0.4s ease;
-    background: #faf6ec;
-    border-radius: 8px;
+    background: #EBE4CF;
     padding: 0;
 }
 .right-panel.open {
-    width: 220px;
+    width: 414px;
+    height: 792px;
     opacity: 1;
     padding: 20px;
 }
 
+.add-btn {
+    background-color: #A1916F;
+    border: 1px solid black;
+    bottom: 56px;
+    font-family: "Edwardian Script ITC", "Edwardian Script", cursive;
+    font-size: 30px;
+    position: relative;
+    padding: 10px 22px;
+    left: 50%;
+}
+.add-btn:hover {
+    background-color: #D9D4C0;
+}
 .close-btn {
     background-color: #A1916F;
     border: 1px solid black;
@@ -127,4 +140,19 @@
     font-size: 13px;
     line-height: 1.8;
     color: #5a4a30;
+}
+
+.search-bar {
+    background-color: #A1916F;
+    font-family: "Edwardian Script ITC", "Edwardian Script", cursive;
+    color: white;
+    border: 1px solid black;
+    font-size: 30px;
+    width: 332px;
+    height: 57px;
+    /* fix color before input */
+}
+.search-bar input[type="text"] {
+    padding-left: 10px;
+    /* fix cut off on left of text */
 }

@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from "react"
+import App from "./App";
 
 function SearchBar() {
     const [input, setInput] = useState("")
     const [output, setOutput] = useState(null)
     const [error, setError] = useState(null)
+    const [addWord, setAddWord] = useState("")
 
     const searchWord = async () => {
         // return nothing
@@ -16,6 +18,7 @@ function SearchBar() {
             if (data.type === "definition") {
                 setOutput(data)
                 setError(null)
+                setAddWord(output.word)
             } else {
                 setOutput(null)
                 setError("No definition found.")
@@ -27,15 +30,15 @@ function SearchBar() {
 
     return (
         <div>
-            <div className="search-bar">
+            <div className="search">
                 <input
+                    className="search-bar"
                     type="text"
                     placeholder="search"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && searchWord()}
                 />
-                <button onClick={searchWord}>search</button>
             </div>
 
             {output && (

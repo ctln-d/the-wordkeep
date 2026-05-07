@@ -2,11 +2,13 @@ import React, { useState } from "react"
 import BookViewer from "./BookViewer"
 import "./App.css"
 import SearchBar from "./SearchBar";
+import pages from "./pages";
 
-function App() {
+function App(props) {
     const [panelLeftOpen, setPanelLeftOpen] = useState(false)
     const [panelRightOpen, setPanelRightOpen] = useState(false)
     const [selectedWord, setSelectedWord] = useState(null)
+    const [pagesList, setPagesList] = useState([])
 
     // runs when a word is clicked
     // recieves word object
@@ -19,6 +21,11 @@ function App() {
         setPanelRightOpen(false)
         setSelectedWord(null)    // clear word when panel closes
     }
+    /* for add button
+    function handleAddWord() {
+
+    }
+    */
 
     return (
         <div className="scene">
@@ -33,7 +40,7 @@ function App() {
             <div className={`left-panel ${panelLeftOpen ? 'open' : ''}`}>
                 <button className="close-btn" onClick={() => setPanelLeftOpen(false)}>X</button>
                 <SearchBar />
-                <h3>Dictionary</h3>
+                <button className="add-btn">add</button>
             </div>
 
             <BookViewer
