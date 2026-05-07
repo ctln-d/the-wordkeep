@@ -7,7 +7,7 @@ app.use(cors())
 
 const port = 3001
 
-app.get('/define', async (req, res) => {
+app.get("/define", async (req, res) => {
     const word = req.query.word
 
     // console.log("REQUEST RECEIVED:", word);

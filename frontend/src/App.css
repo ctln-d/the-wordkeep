@@ -1,0 +1,56 @@
+.scene {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    min-height: 100vh;
+    background: #c8b89a;
+}
+
+/* slide left */
+.book-wrapper {
+    transition: transform 0.5s ease;
+}
+.book-wrapper.shifted {
+    transform: translateX(-100px);
+}
+
+.page {
+    background: #f5f0e0;
+    border: 1px solid #d4c9a8;
+    box-sizing: border-box;
+}
+.pg-content {
+    padding: 24px;
+}
+.pg-content h2 {
+    font-size: 16px;
+    color: #3a2818;
+    margin-bottom: 12px;
+}
+.pg-content p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #5a4a30;
+}
+
+.side-panel {
+    width: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: width 0.5s ease, opacity 0.4s ease;
+    background: #faf6ec;
+    border-radius: 8px;
+    padding: 0;
+}
+.side-panel.open {
+    width: 220px;
+    opacity: 1;
+    padding: 20px;
+}
+
+.open-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+}
