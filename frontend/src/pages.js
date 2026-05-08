@@ -1,11 +1,11 @@
-const pages = [
+const basePages = [
     {
         id: 1,
         words: [
-            { word: "turbulent", type: "adj.", definition: "definition here blah blah blah"},
-            { word: "turbulent", type: "adj.", definition: "definition here blah blah blah"},
-            { word: "turbulent", type: "adj.", definition: "definition here blah blah blah"},
-            { word: "turbulent", type: "adj.", definition: "definition here blah blah blah"},
+            { word: "turbulent", type: "adj.", definitions: ["definition here blah blah blah"]},
+            { word: "turbulent", type: "adj.", definitions: ["definition here blah blah blah"]},
+            { word: "turbulent", type: "adj.", definitions: ["definition here blah blah blah"]},
+            { word: "turbulent", type: "adj.", definitions: ["definition here blah blah blah"]},
             { word: "turbulent", type: "adj."},
             { word: "turbulent", type: "adj."},
             { word: "turbulent", type: "adj."},
@@ -16,9 +16,9 @@ const pages = [
     {
         id: 2,
         words: [
-            { word: "turbulent", type: "adj.", definition: "definition here blah blah blah"},
-            { word: "turbulent", type: "adj.", definition: "definition here blah blah blah"},
-            { word: "turbulent", type: "adj.", definition: "definition here blah blah blah"},
+            { word: "turbulent", type: "adj.", definitions: ["definition here blah blah blah"]},
+            { word: "turbulent", type: "adj.", definitions: ["definition here blah blah blah"]},
+            { word: "turbulent", type: "adj.", definitions: ["definition here blah blah blah"]},
             { word: "turbulent", type: "adj."},
             { word: "turbulent", type: "adj."},
             { word: "turbulent", type: "adj."},

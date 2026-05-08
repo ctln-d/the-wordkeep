@@ -28,7 +28,7 @@ const Page = React.forwardRef(({ words, onWordClick }, ref) => {
     )
 })
 
-function BookViewer({ shiftedLeft, shiftedRight, onWordClick }) {
+function BookViewer({ shiftedLeft, shiftedRight, onWordClick, pages }) {
     const book = useRef()
 
     return (

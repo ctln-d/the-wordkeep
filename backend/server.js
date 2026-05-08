@@ -42,7 +42,8 @@ app.get("/define", async (req, res) => {
 
         res.json({
             type: "definition",
-            word: entry.meta.id.split(":")[0],
+            word: entry["app-shortdef"].hw,
+            partOfSpeech: entry["app-shortdef"].fl,
             definitions: entry.shortdef
         })
     } catch (error) {
