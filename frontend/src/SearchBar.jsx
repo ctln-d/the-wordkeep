@@ -42,8 +42,8 @@ function SearchBar({ onWordFound }) {
 
             {output && (
                 <div className="search-output">
-                    <h2>{output.word}</h2>
-                    <p>{output.partOfSpeech}</p>
+                    <h2 className="word-text-panel">{output.word}</h2>
+                    <p className="word-part-of-speech">{output.partOfSpeech}</p>
                     {/* ordered list */}
                     <ol>
                         {output.definitions.map((def, index) => (

@@ -4,6 +4,16 @@ import basePages from "./pages.js"
 
 // move over a bit so page corners won't be in the way
 function WordRow({ wordObj, onWordClick }) {
+    if (wordObj.partOfSpeech === "noun") {
+        wordObj.partOfSpeech = "n."
+    } else if (wordObj.partOfSpeech === "verb") {
+        wordObj.partOfSpeech = "v."
+    } else if (wordObj.partOfSpeech === "adverb") {
+        wordObj.partOfSpeech = "adv."
+    } else if (wordObj.partOfSpeech === "adjective") {
+        wordObj.partOfSpeech = "adj."
+    }
+
     return (
         <div className="word-row" onClick={() => onWordClick(wordObj)}>
             <span className="word-text">{wordObj.word}</span>

@@ -2,10 +2,15 @@ const basePages = [
     {
         id: 1,
         words: [
+            { word: "turbulent", partOfSpeech: "adj.", definitions: ["definition here blah blah blah", "definition 2"]},
             { word: "turbulent", partOfSpeech: "adj.", definitions: ["definition here blah blah blah"]},
             { word: "turbulent", partOfSpeech: "adj.", definitions: ["definition here blah blah blah"]},
             { word: "turbulent", partOfSpeech: "adj.", definitions: ["definition here blah blah blah"]},
-            { word: "turbulent", partOfSpeech: "adj.", definitions: ["definition here blah blah blah"]},
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "turbulent", partOfSpeech: "adj."},
             { word: "turbulent", partOfSpeech: "adj."},
             { word: "turbulent", partOfSpeech: "adj."},
             { word: "turbulent", partOfSpeech: "adj."},

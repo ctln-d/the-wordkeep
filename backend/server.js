@@ -33,6 +33,7 @@ app.get("/define", async (req, res) => {
 
         // def entry
         const entry = data[0]             // first def?
+        console.log(entry.fl)
 
         if (!entry?.meta?.id || !entry?.shortdef) {
             return res.status(404).json({
@@ -42,8 +43,8 @@ app.get("/define", async (req, res) => {
 
         res.json({
             type: "definition",
-            word: entry["app-shortdef"].hw,
-            partOfSpeech: entry["app-shortdef"].fl,
+            word: entry.meta.id.split(":")[0],
+            partOfSpeech: entry.fl,
             definitions: entry.shortdef
         })
     } catch (error) {

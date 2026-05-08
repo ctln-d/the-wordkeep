@@ -33,13 +33,13 @@ function App(props) {
         const newWord = {
             word: foundWord.word,
             partOfSpeech: foundWord.partOfSpeech,
-            definition: foundWord.definitions[0]    // first def?
+            definitions: foundWord.definitions
         }
 
         const newPages = [...pages]
         const lastPage = newPages[newPages.length - 1]
 
-        if (lastPage.words.length < 10) {
+        if (lastPage.words.length < 13) {
             lastPage.words = [...lastPage.words, newWord]
         } else {
             newPages.push({
@@ -75,22 +75,25 @@ function App(props) {
                 pages={pages}
             /> {/* when panelOpen is true, BookViewer receives shiftedRight={true} and slides over */}
 
-            {/* side panel (right?) */}
+            {/* right panel */}
             <div className={`right-panel ${panelRightOpen ? 'open' : ''}`}>       {/* if panelOpen is true, add the css class 'open', otherwise add nothing */}
                 <button className="close-btn" onClick={handleRightClose}>X</button>
 
+                {/* if multiple vs if one definition */}
                 {selectedWord && (
                     <div className="word-info">
                         {/* inline (takes up as much width as necessary */}
+                        <h2 className="word-text-panel">{selectedWord.word}</h2>
                         <span className="word-part-of-speech">{selectedWord.partOfSpeech}</span>
-                        <h2 className="word-title">{selectedWord.word}</h2>
-                        {/*
-                        <ol>
-                            {selectedWord.definitions.map((def, index) => (
-                                <li key={index}>{def}</li>
-                            ))}
-                        </ol>
-                        */}
+                        {selectedWord.definitions.length > 1 ? (
+                            <ol>
+                                {selectedWord.definitions.map((def, index) => (
+                                    <li key={index}>{def}</li>
+                                ))}
+                            </ol>
+                        ) : (
+                            <p>{selectedWord.definitions[0]}</p>
+                        )}
                     </div>
                 )}
             </div>

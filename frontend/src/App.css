@@ -13,12 +13,15 @@
     gap: 24px;
     min-height: 100vh;
     background: #c8b89a;
+    width: 100vw;
+    overflow: hidden;
 }
 
 /* slide book */
 .book-wrapper {
     display: block;
     transition: transform 0.5s ease;
+    flex-shrink: 0;
 }
 .book-wrapper.shiftedLeft {
     transform: translateX(100px);
@@ -54,12 +57,16 @@
     transition: width 0.5s ease, opacity 0.4s ease;
     background: #EBE4CF;
     padding: 0;
+    flex-shrink: 0;
 }
 .left-panel.open {
     width: 414px;
     height: 792px;
     opacity: 1;
-    padding: 20px
+    padding: 20px 20px 20px 20px;
+    position: relative;
+    display: block;
+    flex-direction: column;
 }
 .right-panel {
     width: 0;
@@ -68,12 +75,13 @@
     transition: width 0.5s ease, opacity 0.4s ease;
     background: #EBE4CF;
     padding: 0;
+    flex-shrink: 0;
 }
 .right-panel.open {
     width: 414px;
     height: 792px;
     opacity: 1;
-    padding: 20px;
+    padding: 20px 20px 20px 20px;
 }
 
 .add-btn {
@@ -82,9 +90,8 @@
     bottom: 56px;
     font-family: "Edwardian Script ITC", "Edwardian Script", cursive;
     font-size: 30px;
-    position: relative;
+    position: absolute;
     padding: 10px 22px;
-    left: 50%;
 }
 .add-btn:hover {
     background-color: #D9D4C0;
@@ -123,6 +130,11 @@
     color: black;
     letter-spacing: 1px;
 
+}
+.word-text-panel {
+    font-size: 40px;
+    color: black;
+    letter-spacing: 1px;
 }
 /* add max width */
 .word-part-of-speech {
