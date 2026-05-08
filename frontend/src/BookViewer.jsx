@@ -1,13 +1,13 @@
 import React, { useRef } from "react"
 import HTMLFlipBook from "react-pageflip"
-import pages from "./pages.js"
+import basePages from "./pages.js"
 
 // move over a bit so page corners won't be in the way
 function WordRow({ wordObj, onWordClick }) {
     return (
         <div className="word-row" onClick={() => onWordClick(wordObj)}>
             <span className="word-text">{wordObj.word}</span>
-            <span className="word-type">{wordObj.type}</span>
+            <span className="word-part-of-speech">{wordObj.partOfSpeech}</span>
         </div>
     )
 }
@@ -63,6 +63,7 @@ function BookViewer({ shiftedLeft, shiftedRight, onWordClick, pages }) {
                     <Page
                         key={page.id}
                         words={page.words}
+                        partOfSpeech={page.partOfSpeech}
                         onWordClick={onWordClick}
                     />
                 ))

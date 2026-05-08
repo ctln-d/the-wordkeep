@@ -13,10 +13,10 @@ function SearchBar({ onWordFound }) {
             const response = await fetch(`http://localhost:3001/define?word=${input}`)
             const data = await response.json()
 
-            if (data.type === "definitions") {
+            if (data.type === "definition") {
                 setOutput(data)
                 setError(null)
-                onWordFound(output)
+                onWordFound(data)
             } else {
                 setOutput(null)
                 setError("No definition found.")
@@ -43,7 +43,7 @@ function SearchBar({ onWordFound }) {
             {output && (
                 <div className="search-output">
                     <h2>{output.word}</h2>
-                    <p>{output.type}</p>
+                    <p>{output.partOfSpeech}</p>
                     {/* ordered list */}
                     <ol>
                         {output.definitions.map((def, index) => (

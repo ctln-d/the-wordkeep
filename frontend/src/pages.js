@@ -2,59 +2,59 @@ const basePages = [
     {
         id: 1,
         words: [
-            { word: "turbulent", type: "adj.", definitions: ["definition here blah blah blah"]},
-            { word: "turbulent", type: "adj.", definitions: ["definition here blah blah blah"]},
-            { word: "turbulent", type: "adj.", definitions: ["definition here blah blah blah"]},
-            { word: "turbulent", type: "adj.", definitions: ["definition here blah blah blah"]},
-            { word: "turbulent", type: "adj."},
-            { word: "turbulent", type: "adj."},
-            { word: "turbulent", type: "adj."},
-            { word: "turbulent", type: "adj."},
-            { word: "turbulent", type: "adj."}
+            { word: "turbulent", partOfSpeech: "adj.", definitions: ["definition here blah blah blah"]},
+            { word: "turbulent", partOfSpeech: "adj.", definitions: ["definition here blah blah blah"]},
+            { word: "turbulent", partOfSpeech: "adj.", definitions: ["definition here blah blah blah"]},
+            { word: "turbulent", partOfSpeech: "adj.", definitions: ["definition here blah blah blah"]},
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "turbulent", partOfSpeech: "adj."}
         ]
     },
     {
         id: 2,
         words: [
-            { word: "turbulent", type: "adj.", definitions: ["definition here blah blah blah"]},
-            { word: "turbulent", type: "adj.", definitions: ["definition here blah blah blah"]},
-            { word: "turbulent", type: "adj.", definitions: ["definition here blah blah blah"]},
-            { word: "turbulent", type: "adj."},
-            { word: "turbulent", type: "adj."},
-            { word: "turbulent", type: "adj."},
-            { word: "turbulent", type: "adj."},
-            { word: "turbulent", type: "adj."},
-            { word: "turbulent", type: "adj."}
+            { word: "turbulent", partOfSpeech: "adj.", definitions: ["definition here blah blah blah"]},
+            { word: "turbulent", partOfSpeech: "adj.", definitions: ["definition here blah blah blah"]},
+            { word: "turbulent", partOfSpeech: "adj.", definitions: ["definition here blah blah blah"]},
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "turbulent", partOfSpeech: "adj."}
         ]
     },
     {
         id: 3,
         words: [
-            { word: "turbulent", type: "adj."},
-            { word: "turbulent", type: "adj."},
-            { word: "turbulent", type: "adj."},
-            { word: "turbulent", type: "adj."},
-            { word: "turbulent", type: "adj."},
-            { word: "turbulent", type: "adj."},
-            { word: "turbulent", type: "adj."},
-            { word: "turbulent", type: "adj."},
-            { word: "turbulent", type: "adj."}
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "turbulent", partOfSpeech: "adj."}
         ]
     },
     {
         id: 4,
         words: [
-            { word: "turbulent", type: "adj."},
-            { word: "turbulent", type: "adj."},
-            { word: "turbulent", type: "adj."},
-            { word: "turbulent", type: "adj."},
-            { word: "blue", type: "adj."},
-            { word: "starry", type: "adj."},
-            { word: "floral", type: "adj."},
-            { word: "excessive", type: "adj."},
-            { word: "useless", type: "adj."}
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "turbulent", partOfSpeech: "adj."},
+            { word: "blue", partOfSpeech: "adj."},
+            { word: "starry", partOfSpeech: "adj."},
+            { word: "floral", partOfSpeech: "adj."},
+            { word: "excessive", partOfSpeech: "adj."},
+            { word: "useless", partOfSpeech: "adj."}
         ]
     }
 ]
 
-export default pages
+export default basePages

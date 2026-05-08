@@ -3,7 +3,6 @@ import BookViewer from "./BookViewer"
 import "./App.css"
 import SearchBar from "./SearchBar";
 import basePages from "./pages";
-import pages from "./pages";
 
 function App(props) {
     const [panelLeftOpen, setPanelLeftOpen] = useState(false)
@@ -33,14 +32,14 @@ function App(props) {
 
         const newWord = {
             word: foundWord.word,
-            type: foundWord.partOfSpeech,
+            partOfSpeech: foundWord.partOfSpeech,
             definition: foundWord.definitions[0]    // first def?
         }
 
         const newPages = [...pages]
         const lastPage = newPages[newPages.length - 1]
 
-        if (newPages[newPages.length - 1]) {
+        if (lastPage.words.length < 10) {
             lastPage.words = [...lastPage.words, newWord]
         } else {
             newPages.push({
@@ -73,6 +72,7 @@ function App(props) {
                 shiftedRight={panelRightOpen}
                 shiftedLeft={panelLeftOpen}
                 onWordClick={handleWordClick}
+                pages={pages}
             /> {/* when panelOpen is true, BookViewer receives shiftedRight={true} and slides over */}
 
             {/* side panel (right?) */}
@@ -82,7 +82,7 @@ function App(props) {
                 {selectedWord && (
                     <div className="word-info">
                         {/* inline (takes up as much width as necessary */}
-                        <span className="word-type">{selectedWord.type}</span>
+                        <span className="word-part-of-speech">{selectedWord.partOfSpeech}</span>
                         <h2 className="word-title">{selectedWord.word}</h2>
                         {/*
                         <ol>
@@ -99,5 +99,8 @@ function App(props) {
 }
 
 export default App
+
+
+
 
 
