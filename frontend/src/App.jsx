@@ -11,6 +11,10 @@ function App(props) {
     const [pages, setPages] = useState(basePages)
     const [foundWord, setFoundWord] = useState(null)
 
+    const bookHeight = Math.min(window.innerHeight * 0.85, 743)
+    const bookWidth = bookHeight * (542 / 743)
+    const scale = bookHeight / 743
+
     // runs when a word is clicked
     // recieves word object
     function handleWordClick(wordObj) {
@@ -65,7 +69,13 @@ function App(props) {
                 <SearchBar onWordFound={handleAddWord}/>
 
                 {/* show or hide */}
-                <button className="add-btn" onClick={addWord}>add</button>
+                <div style={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: "auto"}}>
+                    <button className="add-btn" onClick={addWord}>add</button>
+                </div>
             </div>
 
             <BookViewer
@@ -73,6 +83,9 @@ function App(props) {
                 shiftedLeft={panelLeftOpen}
                 onWordClick={handleWordClick}
                 pages={pages}
+                bookWidth={bookWidth}
+                bookHeight={bookHeight}
+                scale={scale}
             /> {/* when panelOpen is true, BookViewer receives shiftedRight={true} and slides over */}
 
             {/* right panel */}
@@ -85,15 +98,17 @@ function App(props) {
                         {/* inline (takes up as much width as necessary */}
                         <h2 className="word-text-panel">{selectedWord.word}</h2>
                         <span className="word-part-of-speech">{selectedWord.partOfSpeech}</span>
-                        {selectedWord.definitions.length > 1 ? (
-                            <ol>
-                                {selectedWord.definitions.map((def, index) => (
-                                    <li key={index}>{def}</li>
-                                ))}
-                            </ol>
-                        ) : (
-                            <p>{selectedWord.definitions[0]}</p>
-                        )}
+                        <div className="word-definition">
+                            {selectedWord.definitions.length > 1 ? (
+                                <ol>
+                                    {selectedWord.definitions.map((def, index) => (
+                                        <li key={index}>{def}</li>
+                                    ))}
+                                </ol>
+                            ) : (
+                                <p>{selectedWord.definitions[0]}</p>
+                            )}
+                        </div>
                     </div>
                 )}
             </div>

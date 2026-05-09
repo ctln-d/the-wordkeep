@@ -12,6 +12,16 @@ function WordRow({ wordObj, onWordClick }) {
         wordObj.partOfSpeech = "adv."
     } else if (wordObj.partOfSpeech === "adjective") {
         wordObj.partOfSpeech = "adj."
+    } else if (wordObj.partOfSpeech === "conjunction") {
+        wordObj.partOfSpeech = "conj."
+    } else if (wordObj.partOfSpeech === "preposition") {
+        wordObj.partOfSpeech = "prep."
+    } else if (wordObj.partOfSpeech === "pronoun") {
+        wordObj.partOfSpeech = "pron."
+    } else if (wordObj.partOfSpeech === "interjection") {
+        wordObj.partOfSpeech = "interj."
+    } else if (wordObj.partOfSpeech === "imperative verb") {
+        wordObj.partOfSpeech = "imp."
     }
 
     return (
@@ -38,7 +48,7 @@ const Page = React.forwardRef(({ words, onWordClick }, ref) => {
     )
 })
 
-function BookViewer({ shiftedLeft, shiftedRight, onWordClick, pages }) {
+function BookViewer({ shiftedLeft, shiftedRight, onWordClick, pages, bookHeight, bookWidth, scale }) {
     const book = useRef()
 
     return (
@@ -48,12 +58,12 @@ function BookViewer({ shiftedLeft, shiftedRight, onWordClick, pages }) {
                 style={{}}
                 startPage={1}
                 size="fixed"
-                width={542}
-                height={743}
-                minWidth={1}
-                maxWidth={542}
-                minHeight={1}
-                maxHeight={743}
+                width={bookWidth}
+                height={bookHeight}
+                minWidth={bookWidth}
+                maxWidth={bookWidth}
+                minHeight={bookHeight}
+                maxHeight={bookHeight}
                 drawShadow={true}
                 flippingTime={700}
                 usePortrait={false}
@@ -75,6 +85,7 @@ function BookViewer({ shiftedLeft, shiftedRight, onWordClick, pages }) {
                         words={page.words}
                         partOfSpeech={page.partOfSpeech}
                         onWordClick={onWordClick}
+                        scale={scale}
                     />
                 ))
                 }

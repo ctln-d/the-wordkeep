@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react"
+import React, { useState } from "react"
 
 function SearchBar({ onWordFound }) {
     const [input, setInput] = useState("")
@@ -30,26 +30,35 @@ function SearchBar({ onWordFound }) {
     return (
         <div>
             <div className="search">
-                <input
-                    className="search-bar"
-                    type="text"
-                    placeholder="search"
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && searchWord()}
-                />
+                <div style={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: "auto"}}>
+                    <input
+                        className="search-bar"
+                        type="text"
+                        placeholder="search"
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        onKeyDown={(e) => e.key === "Enter" && searchWord()}
+                    />
+                </div>
             </div>
 
             {output && (
                 <div className="search-output">
                     <h2 className="word-text-panel">{output.word}</h2>
                     <p className="word-part-of-speech">{output.partOfSpeech}</p>
-                    {/* ordered list */}
-                    <ol>
-                        {output.definitions.map((def, index) => (
-                            <li key={index}>{def}</li>
+                    {output.definitions.length > 1 ? (
+                        <ol>
+                            {output.definitions.map((def, index) => (
+                                <li key={index}>{def}</li>
                             ))}
-                    </ol>
+                        </ol>
+                    ) : (
+                        <p>{output.definitions[0]}</p>
+                    )}
                 </div>
             )}
         </div>
