@@ -15,6 +15,8 @@ function App(props) {
     const bookWidth = bookHeight * (542 / 743)
     const scale = bookHeight / 743
 
+    console.log(scale)
+
     // runs when a word is clicked
     // recieves word object
     function handleWordClick(wordObj) {

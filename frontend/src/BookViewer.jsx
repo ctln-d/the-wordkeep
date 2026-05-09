@@ -3,7 +3,7 @@ import HTMLFlipBook from "react-pageflip"
 import basePages from "./pages.js"
 
 // move over a bit so page corners won't be in the way
-function WordRow({ wordObj, onWordClick }) {
+function WordRow({ wordObj, onWordClick, scale }) {
     if (wordObj.partOfSpeech === "noun") {
         wordObj.partOfSpeech = "n."
     } else if (wordObj.partOfSpeech === "verb") {
@@ -24,23 +24,30 @@ function WordRow({ wordObj, onWordClick }) {
         wordObj.partOfSpeech = "imp."
     }
 
+    console.log(scale)
     return (
-        <div className="word-row" onClick={() => onWordClick(wordObj)}>
-            <span className="word-text">{wordObj.word}</span>
-            <span className="word-part-of-speech">{wordObj.partOfSpeech}</span>
+        <div
+            className="word-row"
+            onClick={() => onWordClick(wordObj)}
+            style={{ padding: `${8 * scale}px ${4 * scale}px` }}
+        >
+            <span className="word-text" style={{ fontSize: `${28 * scale}px`}}>{wordObj.word}</span>
+            <span className="word-part-of-speech" style={{ fontSize: `${28 * scale}px`}}>{wordObj.partOfSpeech}</span>
         </div>
     )
 }
 
-const Page = React.forwardRef(({ words, onWordClick }, ref) => {
+const Page = React.forwardRef(({ words, onWordClick, scale }, ref) => {
     return (
-        <div className="page" ref={ref}>
+        <div className="page" ref={ref} style={{ padding: `${28 * scale}px ${24 * scale}px`
+        }}>
             <div className="pg-content">
                 {words.map((wordObj, index) => (
                     <WordRow
                         key={index}
                         wordObj={wordObj}
                         onWordClick={onWordClick}
+                        scale={scale}
                     />
                 ))}
             </div>

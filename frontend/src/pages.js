@@ -14,7 +14,6 @@ const basePages = [
             { word: "turbulent", partOfSpeech: "adj."},
             { word: "turbulent", partOfSpeech: "adj."},
             { word: "turbulent", partOfSpeech: "adj."},
-            { word: "turbulent", partOfSpeech: "adj."},
             { word: "turbulent", partOfSpeech: "adj."}
         ]
     },
