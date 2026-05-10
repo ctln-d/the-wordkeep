@@ -52,6 +52,16 @@ app.get("/define", async (req, res) => {
     }
 })
 
+const path = require('path')
+
+// serve built frontend files
+app.use(express.static(path.join(__dirname, '../frontend/dist')))
+
+// any route that isn't an API route sends the frontend
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/dist/index.html'))
+})
+
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`)
 })
