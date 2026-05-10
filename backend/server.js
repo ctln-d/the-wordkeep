@@ -10,8 +10,6 @@ const port = 3001
 app.get("/define", async (req, res) => {
     const word = req.query.word
 
-    // console.log("REQUEST RECEIVED:", word);
-
     if (!word) {
         return res.status(400).json({error: "Word is required"})
     }
@@ -33,7 +31,6 @@ app.get("/define", async (req, res) => {
 
         // def entry
         const entry = data[0]             // first def?
-        console.log(entry.fl)
 
         if (!entry?.meta?.id || !entry?.shortdef) {
             return res.status(404).json({
@@ -52,7 +49,8 @@ app.get("/define", async (req, res) => {
     }
 })
 
-const path = require('dotenv').config()
+const path = require('path')
+require('dotenv').config()
 
 // serve built frontend files
 app.use(express.static(path.join(__dirname, '../frontend/dist')))
