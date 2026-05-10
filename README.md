@@ -14,7 +14,12 @@ The Wordkeep is a tool to collect words and their definitions using the Merriam-
 
 # Getting Started
 
-Open the URL: https://the-wordkeep.onrender.com/
+1. Open the URL: https://the-wordkeep.onrender.com/
+2. Click on the "dictionary" button to open the left panel.
+3. Type in a word in the search bar and press the "enter" key. A message will show if the word is not supported by this dictionary ("No definition found.").
+4. If the word exists, click the "add" button to add it to the book. As of now, the words are not saved to the browser and will disappear if reloaded.
+5. To revisit the definition of a word in the book, simply click on the word on the page.
+6. Click or drag the page corners to turn the page, if applicable. No new pages will be available until the exiting pages are full.
 
 # Contributing
 
