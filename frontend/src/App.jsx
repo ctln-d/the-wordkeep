@@ -42,14 +42,22 @@ function App() {
         }
 
         const newPages = [...pages]
+        const lastFullPage = newPages[newPages.length - 2]  // second to last
         const lastPage = newPages[newPages.length - 1]
 
-        if (lastPage.words.length < 13) {
+        if (lastFullPage.words.length < 13) {
+            lastFullPage.words = [...lastFullPage.words, newWord]
+        } else if (lastPage.words.length < 13) {
             lastPage.words = [...lastPage.words, newWord]
         } else {
             newPages.push({
                 id: newPages.length + 1,
                 words: [newWord]
+            })
+            // second page for ui
+            newPages.push({
+                id: newPages.length + 1,
+                words: []
             })
         }
         setPages(newPages)

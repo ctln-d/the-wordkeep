@@ -26,7 +26,6 @@ function WordRow({ wordObj, onWordClick, scale }) {
         wordObj.partOfSpeech = "abbr."
     }
 
-    console.log(scale)
     return (
         <div
             className="word-row"

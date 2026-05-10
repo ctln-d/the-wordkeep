@@ -11,9 +11,9 @@
     align-items: center;
     justify-content: center;
     gap: 24px;
-    min-height: 100vh;
+    height: 100vh;
     background: #c8b89a;
-    min-width: 100vw;
+    width: 100vw;
     overflow: hidden;
     font-family: "Times New Roman", Times, serif;
 }
