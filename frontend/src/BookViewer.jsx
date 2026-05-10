@@ -22,6 +22,8 @@ function WordRow({ wordObj, onWordClick, scale }) {
         wordObj.partOfSpeech = "interj."
     } else if (wordObj.partOfSpeech === "imperative verb") {
         wordObj.partOfSpeech = "imp."
+    } else if (wordObj.partOfSpeech === "abbreviation") {
+        wordObj.partOfSpeech = "abbr."
     }
 
     console.log(scale)
@@ -37,7 +39,7 @@ function WordRow({ wordObj, onWordClick, scale }) {
     )
 }
 
-const Page = React.forwardRef(({ words, onWordClick, scale }, ref) => {
+const Page = React.forwardRef(({ words, onWordClick, scale, id }, ref) => {
     return (
         <div className="page" ref={ref} style={{ padding: `${28 * scale}px ${24 * scale}px`
         }}>
@@ -50,6 +52,9 @@ const Page = React.forwardRef(({ words, onWordClick, scale }, ref) => {
                         scale={scale}
                     />
                 ))}
+            </div>
+            <div className="pg-num" style={{ fontSize: `${17 * scale}px`, bottom: `${3 * scale}px` }}>
+                <p>{id + 1}</p>
             </div>
         </div>
     )
@@ -89,6 +94,7 @@ function BookViewer({ shiftedLeft, shiftedRight, onWordClick, pages, bookHeight,
                 {pages.map(page => (
                     <Page
                         key={page.id}
+                        id={page.id}
                         words={page.words}
                         partOfSpeech={page.partOfSpeech}
                         onWordClick={onWordClick}

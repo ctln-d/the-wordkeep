@@ -4,7 +4,7 @@ import "./App.css"
 import SearchBar from "./SearchBar";
 import basePages from "./pages";
 
-function App(props) {
+function App() {
     const [panelLeftOpen, setPanelLeftOpen] = useState(false)
     const [panelRightOpen, setPanelRightOpen] = useState(false)
     const [selectedWord, setSelectedWord] = useState(null)
@@ -15,13 +15,12 @@ function App(props) {
     const bookWidth = bookHeight * (542 / 743)
     const scale = bookHeight / 743
 
-    console.log(scale)
-
     // runs when a word is clicked
     // recieves word object
     function handleWordClick(wordObj) {
         setSelectedWord(wordObj)    // save clicked word
         setPanelRightOpen(true)
+        setPanelLeftOpen(false)
     }
 
     function handleRightClose() {
@@ -60,7 +59,9 @@ function App(props) {
         <div className="scene">
             {/* button to open left panel */}
             {!panelLeftOpen && (
-                <button className="open-dic-btn" onClick={() => setPanelLeftOpen(true)}>
+                <button className="open-dic-btn" onClick={() => {
+                    setPanelLeftOpen(true);
+                    setPanelRightOpen(false)}}>
                     dictionary
                 </button>
             )}

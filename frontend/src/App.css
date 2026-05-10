@@ -13,7 +13,7 @@
     gap: 24px;
     min-height: 100vh;
     background: #c8b89a;
-    width: 100vw;
+    min-width: 100vw;
     overflow: hidden;
     font-family: "Times New Roman", Times, serif;
 }
@@ -49,6 +49,12 @@
     font-size: 13px;
     line-height: 1.7;
     color: #5a4a30;
+}
+.pg-num {
+    font-size: 17px;
+    position: absolute;
+    left: 50%;
+    bottom: 3px;
 }
 
 .left-panel {
@@ -162,10 +168,14 @@
     color: white;
     border: 1px solid black;
     font-size: 30px;
-    width: 332px;
+    width: 344px;
     height: 57px;
     /* fix color before input */
 }
+.search-bar::placeholder {
+    padding-left: 10px;
+}
+
 .search-bar input[type="text"] {
     padding-left: 10px;
     /* fix cut off on left of text */
