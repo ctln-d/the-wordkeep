@@ -18,7 +18,7 @@ app.get("/define", async (req, res) => {
 
     try {
         const response = await axios.get(
-            `https://dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=3c94618e-5cc0-4627-9239-338d355c5fbd`
+            `https://dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${process.env.MERRIAM_KEY}`
         )
 
         const data = response.data
@@ -52,7 +52,7 @@ app.get("/define", async (req, res) => {
     }
 })
 
-const path = require('path')
+const path = require('dotenv').config()
 
 // serve built frontend files
 app.use(express.static(path.join(__dirname, '../frontend/dist')))
