@@ -24,6 +24,8 @@ function WordRow({ wordObj, onWordClick, scale }) {
         wordObj.partOfSpeech = "imp."
     } else if (wordObj.partOfSpeech === "abbreviation") {
         wordObj.partOfSpeech = "abbr."
+    } else if (wordObj.partOfSpeech === "combining form") {
+        wordObj.partOfSpeech = "comb. form"
     }
 
     return (

@@ -1,3 +1,6 @@
+require('dotenv').config()
+console.log(process.env.MERRIAM_KEY)
+const path = require('path')
 const express = require("express")
 const cors = require("cors")
 const axios = require("axios")
@@ -48,9 +51,6 @@ app.get("/define", async (req, res) => {
         res.status(500).json({error: "API request failed"})
     }
 })
-
-const path = require('path')
-require('dotenv').config()
 
 // serve built frontend files
 app.use(express.static(path.join(__dirname, '../frontend/dist')))
