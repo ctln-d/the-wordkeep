@@ -10,7 +10,7 @@ function SearchBar({ onWordFound }) {
         if (!input) return
 
         try {
-            const response = await fetch(`http://localhost:3001/define?word=${input}`)
+            const response = await fetch(`/define?word=${input}`)
             const data = await response.json()
             console.log(data)
 
