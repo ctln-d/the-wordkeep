@@ -18,12 +18,13 @@ function SearchBar({ onWordFound }) {
                 setError(null)
                 onWordFound(data)
             } else {
+                // apparently not hitting here, fix
                 setOutput(null)
                 setError("No definition found.")
                 onWordFound(null)
             }
         } catch (err) {
-            setError("Something went wrong.")
+            setError("No definition found.")
         }
     }
 
@@ -46,6 +47,8 @@ function SearchBar({ onWordFound }) {
                 </div>
             </div>
 
+            {error && <p className="search-error">{error}</p>}
+
             {output && (
                 <div className="search-output">
                     <h2 className="word-text-panel">{output.word}</h2>
@@ -59,7 +62,6 @@ function SearchBar({ onWordFound }) {
                     ) : (
                         <p>{output.definitions[0]}</p>
                     )}
-                    <p className="search-error">{error}</p>
                 </div>
             )}
         </div>
