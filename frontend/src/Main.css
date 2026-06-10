@@ -170,15 +170,7 @@
     font-size: 30px;
     width: 344px;
     height: 57px;
-    /* fix color before input */
-}
-.search-bar::placeholder {
-    padding-left: 10px;
-}
-
-.search-bar input[type="text"] {
-    padding-left: 10px;
-    /* fix cut off on left of text */
+    padding-left: 10px; /* fix "p" cutoff" */
 }
 
 @media (max-width: 1400px) {

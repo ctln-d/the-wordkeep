@@ -1,18 +1,19 @@
 import "./Auth.css"
 
-function Login() {
+function SignUp() {
     return (
         <div>
-            <p className="title">Login</p>
+            <p className="title">Sign Up</p>
 
             <form>
+                <input required type="text" placeholder="name" autoComplete="off" />
                 <input required type="email" placeholder="email" autoComplete="off" className="email" />
                 <input required type="password" placeholder="password" autoComplete="off" className="password"/>
-                <button type="submit" className="btn">login</button>
-                <a href="/signup" className="link">don't have an account?</a>
+                <button type="submit" className="btn">sign up</button>
+                <a href="/login" className="link">already have an account?</a>
             </form>
         </div>
     )
 }
 
-export default Login;
+export default SignUp;
