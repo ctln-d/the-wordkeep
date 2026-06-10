@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import "./Auth.css"
 import axios from "axios"
 
 function Login() {
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -15,6 +18,9 @@ function Login() {
         })
         .then(res => {
             console.log(res.data);
+            if (res.data.status === "SUCCESS") {
+                navigate("/");
+            }
         })
         .catch(err => {
             console.log(err);
