@@ -53,7 +53,8 @@ form input {
     color: black;
     margin: 40px auto;
     font-size: 17px;
+    text-decoration: none;
 }
 .link:hover {
-    color: #A1916F;
+    text-decoration: underline;
 }

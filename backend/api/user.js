@@ -1,14 +1,14 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 // mongodb user model
-const User = require('./../models/user')
+const User = require("./../models/user")
 
 // password handler
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
 // sign up
-router.post('/signup', (req, res) => {
+router.post("/signup", (req, res) => {
     let {name, email, password} = req.body;
     name = name.trim();
     email = email.trim();
@@ -19,12 +19,12 @@ router.post('/signup', (req, res) => {
             status: "FAILED",
             message: "Empty input fields!"
         });
-    } else if (!/^[a-zA-Z]*$/.test(name)) {
+    } else if (!/^[a-zA-Z ]*$/.test(name)) {
         return res.json({
             status: "FAILED",
             message: "Invalid name entered"
         });
-    } else if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+    } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
         return res.json({
             status: "FAILED",
             message: "Invalid email entered"
@@ -84,8 +84,55 @@ router.post('/signup', (req, res) => {
 });
 
 // log in
-router.post('/login', (req, res) => {
+router.post("/login", (req, res) => {
+    let {email, password} = req.body;
+    email = email.trim();
+    password = password.trim();
 
+    if (email === "" || password === "") {
+        return res.json({
+            status: "FAILED",
+            message: "Empty credentials"
+        });
+    } else {
+        User.find({email})
+            .then(data => {
+                if (data.length) {
+                    const hashedPassword = data[0].password;
+                    bcrypt.compare(password, hashedPassword).then(result => {
+                        if (result) {
+                            return res.json({
+                                status: "SUCCESS",
+                                message: "Login successful",
+                                data: data
+                            });
+                        } else {
+                            return res.json({
+                                status: "FAILED",
+                                message: "Invalid password entered"
+                            });
+                        }
+                    })
+                    .catch(err => {
+                        return res.json({
+                            status: "FAILED",
+                            message: "An error occurred while comparing passwords"
+                        });
+                    });
+                } else {
+                    return res.json({
+                        status: "FAILED",
+                        message: "Invalid credentials entered"
+                    });
+                }
+            })
+            .catch(err => {
+                return res.json({
+                   status: "FAILED",
+                   message: "An error occurred while checking for existing user"
+                });
+            })
+    }
 })
 
 module.exports = router;
