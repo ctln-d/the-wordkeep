@@ -76,3 +76,56 @@ form input {
     background: transparent;
     cursor: pointer;
 }
+
+#login-password {
+    anchor-name: --password-input;
+}
+#login-eye {
+    position: absolute;
+    position-anchor: --password-input;
+    top: anchor(30%);
+    bottom: anchor(bottom);
+    right: anchor(right);
+    margin: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+#signup-password {
+    anchor-name: --password-input;
+}
+#signup-eye {
+    position: absolute;
+    position-anchor: --password-input;
+    top: anchor(30%);
+    bottom: anchor(bottom);
+    right: anchor(right);
+    margin: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.alert-box{
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 150px;
+    max-width: 90%;
+    width: auto;
+    height: auto;
+    padding: 12px;
+    padding-left: 15px;
+    padding-right: 50px;
+    background-color: #A1916F;
+    border: black;
+    color: white;
+    text-align: left;
+    animation: down 5s;
+}
+
+@keyframes down {
+    from {top: 0px;}
+    to {top: 60px}
+}

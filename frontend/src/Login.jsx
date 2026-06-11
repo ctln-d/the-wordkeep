@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { FaEye, FaEyeSlash } from "react-icons/fa"
 import "./Auth.css"
 import axios from "axios"
 
@@ -8,6 +9,10 @@ function Login() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const [error, setError] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -19,7 +24,10 @@ function Login() {
         .then(res => {
             console.log(res.data);
             if (res.data.status === "SUCCESS") {
-                navigate("/");
+                setError("");
+                navigate("/main");
+            } else {
+                setError(res.data.message);
             }
         })
         .catch(err => {
@@ -30,6 +38,12 @@ function Login() {
     return (
         <div>
             <p className="title">Login</p>
+
+            {error && (
+                <div className="alert-box">
+                    {error}
+                </div>
+            )}
 
             <form onSubmit={handleSubmit}>
                 <input
@@ -42,12 +56,21 @@ function Login() {
                 />
                 <input
                     required
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     placeholder="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="password"
+                    id="login-password"
                 />
+                <button
+                    type="button"
+                    className="eye-btn"
+                    id="login-eye"
+                    onClick={() => setShowPassword(!showPassword)}
+                >
+                    {showPassword ? <FaEye /> : <FaEyeSlash />}
+                </button>
                 <button type="submit" className="btn">login</button>
                 <a href="/signup" className="link">don't have an account?</a>
             </form>
