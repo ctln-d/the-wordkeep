@@ -1,9 +1,9 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { FaEye, FaEyeSlash } from "react-icons/fa"
-import { RiCloseLargeLine } from "react-icons/ri"
-import "./Auth.css"
-import axios from "axios"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { RiCloseLargeLine } from "react-icons/ri";
+import "./Auth.css";
+import axios from "axios";
 
 function Login() {
     const navigate = useNavigate();
@@ -26,6 +26,7 @@ function Login() {
             console.log(res.data);
             if (res.data.status === "SUCCESS") {
                 setError("");
+                localStorage.setItem("userId", res.data.userId);
                 navigate("/main");
             } else {
                 setError(res.data.message);

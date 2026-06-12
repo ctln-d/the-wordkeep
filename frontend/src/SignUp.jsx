@@ -28,6 +28,7 @@ function SignUp() {
             console.log(res.data);
             if (res.data.status === "SUCCESS") {
                 setError("");
+                localStorage.setItem("userId", res.data.userId);
                 navigate("/main");
             } else {
                 setError(res.data.message);

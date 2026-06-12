@@ -17,7 +17,7 @@ router.post("/signup", (req, res) => {
     if (username === "" || email === "" || password === "" ) {
         return res.json({
             status: "FAILED",
-            message: "Empty input fields!"
+            message: "Empty input fields"
         });
     // change to accommodate username
     } else if (!/^[a-zA-Z ]*$/.test(username)) {
@@ -67,7 +67,7 @@ router.post("/signup", (req, res) => {
                             return res.json({
                                 status: "SUCCESS",
                                 message: "Signup successful",
-                                data: result
+                                userId: result._id
                             })
                         }).catch(err => {
                             return res.json({
@@ -109,12 +109,15 @@ router.post("/login", (req, res) => {
             .then(data => {
                 if (data.length) {
                     const hashedPassword = data[0].password;
+                    console.log("USER FOUND:", data[0]);
+                    console.log("PASSWORD IN DB:", data[0].password);
+                    console.log("PASSWORD FROM USER:", password);
                     bcrypt.compare(password, hashedPassword).then(result => {
                         if (result) {
                             return res.json({
                                 status: "SUCCESS",
                                 message: "Login successful",
-                                data: data
+                                userId: data[0]._id
                             });
                         } else {
                             return res.json({

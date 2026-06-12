@@ -1,6 +1,6 @@
-import { Navigate, Routes, Route } from "react-router-dom"
-import Main from "./Main"
-import Login from "./Login"
+import { Navigate, Routes, Route } from "react-router-dom";
+import Main from "./Main";
+import Login from "./Login";
 import SignUp from "./SignUp";
 
 // maybe change w guest landing pg before login/sign up

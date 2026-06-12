@@ -1,66 +1,96 @@
-import React, { useState } from "react"
-import BookViewer from "./BookViewer"
-import "./Main.css"
-import SearchBar from "./SearchBar"
-import basePages from "./pages"
+import React, { useState, useEffect } from "react";
+import BookViewer from "./BookViewer";
+import "./Main.css";
+import SearchBar from "./SearchBar";
+import basePages from "./pages";
 
 function Main() {
-    const [panelLeftOpen, setPanelLeftOpen] = useState(false)
-    const [panelRightOpen, setPanelRightOpen] = useState(false)
-    const [selectedWord, setSelectedWord] = useState(null)
-    const [pages, setPages] = useState(basePages)
-    const [foundWord, setFoundWord] = useState(null)
+    const [panelLeftOpen, setPanelLeftOpen] = useState(false);
+    const [panelRightOpen, setPanelRightOpen] = useState(false);
+    const [selectedWord, setSelectedWord] = useState(null);
+    const [pages, setPages] = useState(basePages);
+    const [foundWord, setFoundWord] = useState(null);
 
-    const bookHeight = Math.min(window.innerHeight * 0.85, 743)
-    const bookWidth = bookHeight * (542 / 743)
-    const scale = bookHeight / 743
+    const bookHeight = Math.min(window.innerHeight * 0.85, 743);
+    const bookWidth = bookHeight * (542 / 743);
+    const scale = bookHeight / 743;
+
+    // existing pages by user
+    useEffect(() => {
+        const userId = localStorage.getItem("userId");
+        console.log("USER ID:", userId);
+
+        fetch(`http://localhost:3001/pages/getPages?userId=${userId}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "SUCCESS") {
+                    setPages(data.pages);
+                }
+            })
+            .catch(err => console.log(err));
+    }, []);
 
     // runs when a word is clicked
     // recieves word object
     function handleWordClick(wordObj) {
-        setSelectedWord(wordObj)    // save clicked word
-        setPanelRightOpen(true)
-        setPanelLeftOpen(false)
+        setSelectedWord(wordObj);  // save clicked word
+        setPanelRightOpen(true);
+        setPanelLeftOpen(false);
     }
 
     function handleRightClose() {
-        setPanelRightOpen(false)
-        setSelectedWord(null)    // clear word when panel closes
+        setPanelRightOpen(false);
+        setSelectedWord(null);    // clear word when panel closes
     }
 
     function handleAddWord(output) {
-        setFoundWord(output)
+        setFoundWord(output);
     }
 
     function addWord() {
-        if (!foundWord) return
+        if (!foundWord) return;
 
         const newWord = {
             word: foundWord.word,
             partOfSpeech: foundWord.partOfSpeech,
             definitions: foundWord.definitions
-        }
+        };
 
-        const newPages = [...pages]
-        const lastFullPage = newPages[newPages.length - 2]  // second to last
-        const lastPage = newPages[newPages.length - 1]
+        const newPages = [...pages];
+        const lastFullPage = newPages[newPages.length - 2];  // second to last
+        const lastPage = newPages[newPages.length - 1];
 
         if (lastFullPage.words.length < 13) {
-            lastFullPage.words = [...lastFullPage.words, newWord]
+            lastFullPage.words = [...lastFullPage.words, newWord];
         } else if (lastPage.words.length < 13) {
-            lastPage.words = [...lastPage.words, newWord]
+            lastPage.words = [...lastPage.words, newWord];
         } else {
             newPages.push({
                 id: newPages.length + 1,
                 words: [newWord]
-            })
+            });
             // second page for ui
             newPages.push({
                 id: newPages.length + 1,
                 words: []
-            })
+            });
         }
-        setPages(newPages)
+        setPages(newPages);
+
+        const userId = localStorage.getItem("userId");
+
+        fetch("http://localhost:3001/pages/savePages", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                userId,
+                pages: newPages
+            })
+        }).then(res => res.json())
+            .then(data => console.log("SAVE RESULT:", data))
+            .catch(err => console.log(err));
     }
 
     return (
@@ -127,9 +157,4 @@ function Main() {
     )
 }
 
-export default Main
-
-
-
-
-
+export default Main;

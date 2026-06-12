@@ -7,6 +7,6 @@ const basePages = [
         id: 2,
         words: []
     }
-]
+];
 
-export default basePages
+export default basePages;

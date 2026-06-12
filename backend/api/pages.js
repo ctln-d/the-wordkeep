@@ -5,7 +5,7 @@ const Pages = require("../models/Pages");
 
 // GET
 router.get("/getPages", (req, res) => {
-   const userId = req.body;
+   const userId = req.query.userId;
 
    Pages.findOne({ userId })
        .then(data => {
@@ -29,7 +29,7 @@ router.post("/savePages", (req, res) => {
    Pages.findOneAndUpdate(
        { userId },
        { pages },
-       { upsert: true }
+       { upsert: true, new: true }
    ).then(() => {
        return res.json({ status: "SUCCESS"});
    }).catch(err => {

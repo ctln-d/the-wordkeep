@@ -64,14 +64,14 @@ const PagesRouter = require("./api/pages");
 app.use("/pages", PagesRouter);
 
 // serve built frontend files
-app.use(express.static(path.join(__dirname, '../frontend/dist')))
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 // any route that isn't an API route sends the frontend
 app.get('/{*path}', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/dist/index.html'))
-})
+    res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+});
 
 
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`)
-})
+    console.log(`Server running at http://localhost:${port}`);
+});

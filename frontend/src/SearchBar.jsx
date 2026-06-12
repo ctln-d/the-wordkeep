@@ -1,31 +1,31 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 
 function SearchBar({ onWordFound }) {
-    const [input, setInput] = useState("")
-    const [output, setOutput] = useState(null)
-    const [error, setError] = useState(null)
+    const [input, setInput] = useState("");
+    const [output, setOutput] = useState(null);
+    const [error, setError] = useState(null);
 
     const searchWord = async () => {
         // return nothing
-        if (!input) return
+        if (!input) return;
 
         try {
-            const response = await fetch(`/define?word=${input}`)
-            const data = await response.json()
-            console.log(data)
+            const response = await fetch(`http://localhost:3001/define?word=${input}`); // change when deploying on render
+            const data = await response.json();
+            console.log(data);
 
             if (data.type === "definition") {
-                setOutput(data)
-                setError(null)
-                onWordFound(data)
+                setOutput(data);
+                setError(null);
+                onWordFound(data);
             } else {
-                setOutput(null)
-                setError("No definition found.")
-                onWordFound(null)
+                setOutput(null);
+                setError("No definition found.");
+                onWordFound(null);
             }
         } catch (err) {
-            setError("Something went wrong.")
-            console.log(err)
+            setError("Something went wrong.");
+            console.log(err);
         }
     }
 
@@ -70,4 +70,4 @@ function SearchBar({ onWordFound }) {
 }
 
 
-export default SearchBar
+export default SearchBar;
