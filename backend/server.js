@@ -1,15 +1,18 @@
-require('dotenv').config()
-console.log(process.env.MERRIAM_KEY)
-const path = require('path')
-const express = require("express")
-const cors = require("cors")
-const axios = require("axios")
+require('dotenv').config();
+require("./config/db");
+const path = require('path');
+const express = require("express");
+const cors = require("cors");
+const axios = require("axios");
+
 
 const app = express()
 app.use(cors())
+app.use(express.json());
 
 const port = 3001
 
+// definitions
 app.get("/define", async (req, res) => {
     const word = req.query.word
 
@@ -52,6 +55,14 @@ app.get("/define", async (req, res) => {
     }
 })
 
+// auth
+const UserRouter = require("./api/user");
+app.use("/user", UserRouter);
+
+// pages           **change everything to async/await
+const PagesRouter = require("./api/pages");
+app.use("/pages", PagesRouter);
+
 // serve built frontend files
 app.use(express.static(path.join(__dirname, '../frontend/dist')))
 
@@ -59,6 +70,7 @@ app.use(express.static(path.join(__dirname, '../frontend/dist')))
 app.get('/{*path}', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/dist/index.html'))
 })
+
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`)

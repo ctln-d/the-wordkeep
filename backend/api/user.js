@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 // mongodb user model
-const User = require("./../models/user")
+const User = require("../models/User");
 
 // password handler
 const bcrypt = require("bcrypt");
@@ -84,7 +84,7 @@ router.post("/signup", (req, res) => {
                 }
             }).catch(err => {
                 console.log(err);
-                res.json({
+                return res.json({
                     status: "FAILED",
                     message: "An error occurred while checking for existing user"
                 });
@@ -95,17 +95,17 @@ router.post("/signup", (req, res) => {
 
 // log in
 router.post("/login", (req, res) => {
-    let {email, password} = req.body;
-    email = email.trim();
+    let {username, password} = req.body;
+    username = username.trim();
     password = password.trim();
 
-    if (email === "" || password === "") {
+    if (username === "" || password === "") {
         return res.json({
             status: "FAILED",
             message: "Empty credentials"
         });
     } else {
-        User.find({email})
+        User.find({username})
             .then(data => {
                 if (data.length) {
                     const hashedPassword = data[0].password;

@@ -8,7 +8,7 @@ import axios from "axios"
 function Login() {
     const navigate = useNavigate();
 
-    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     const [showPassword, setShowPassword] = useState(false);
@@ -18,8 +18,8 @@ function Login() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.post("http://localhost:3002/user/login", {
-            email,
+        axios.post("http://localhost:3001/user/login", {
+            username,
             password
         })
         .then(res => {
@@ -53,11 +53,11 @@ function Login() {
             <form onSubmit={handleSubmit}>
                 <input
                     required
-                    type="email"
-                    placeholder="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="email"
+                    type="username"
+                    placeholder="username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    className="username"
                 />
                 <input
                     required
