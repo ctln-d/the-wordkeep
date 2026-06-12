@@ -21,7 +21,7 @@ function Main() {
         console.log("USER ID:", userId);
         if(!userId) return;
 
-        fetch(`http://localhost:3001/pages/getPages?userId=${userId}`)
+        fetch(`/pages/getPages?userId=${userId}`)
             .then(res => res.json())
             .then(data => {
                 if (data.status === "SUCCESS" && Array.isArray(data.pages)) {
@@ -90,7 +90,7 @@ function Main() {
 
         const userId = localStorage.getItem("userId");
 
-        fetch("http://localhost:3001/pages/savePages", {
+        fetch("/pages/savePages", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
