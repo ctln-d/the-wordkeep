@@ -141,10 +141,11 @@ router.post("/login", (req, res) => {
                 });
         })
         .catch(err => {
+            console.log("LOGIN DB ERROR:", err)
             console.log(err);
             return res.json({
                 status: "FAILED",
-                message: "DB error"
+                message: err.message
             });
         })
 })
