@@ -116,16 +116,17 @@ form input {
     width: auto;
     height: auto;
     padding: 12px;
-    padding-left: 15px;
-    padding-right: 50px;
     background-color: #A1916F;
     border: black;
     color: white;
-    text-align: left;
-    animation: down 5s;
+    animation: down 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
 }
 
 @keyframes down {
-    from {top: 0px;}
+    from {top: 0;}
     to {top: 60px}
 }

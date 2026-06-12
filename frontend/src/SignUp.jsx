@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa"
+import { RiCloseLargeLine } from "react-icons/ri"
 import "./Auth.css"
 import axios from "axios"
 
@@ -44,6 +45,10 @@ function SignUp() {
             {error && (
                 <div className="alert-box">
                     {error}
+                    <RiCloseLargeLine
+                        onClick={() => setError("")}
+                        style={{ cursor: "pointer" }}
+                    />
                 </div>
             )}
 
