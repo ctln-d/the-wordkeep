@@ -7,8 +7,11 @@ const Pages = require("../models/Pages");
 router.get("/getPages", (req, res) => {
    const userId = req.query.userId;
 
+   console.log("GET USER ID:", userId);
+
    Pages.findOne({ userId })
        .then(data => {
+           console.log("GET RESULT:", data);
            return res.json({
                status: "SUCCESS",
                pages: data?.pages || []
@@ -26,11 +29,13 @@ router.get("/getPages", (req, res) => {
 router.post("/savePages", (req, res) => {
    const { userId, pages } = req.body;
 
+   console.log("SAVE USER ID:", userId);
+
    Pages.findOneAndUpdate(
        { userId },
        { pages },
        { upsert: true, new: true }
-   ).then(() => {
+   ).then(result => {
        return res.json({ status: "SUCCESS"});
    }).catch(err => {
        console.log(err)

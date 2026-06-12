@@ -104,48 +104,49 @@ router.post("/login", (req, res) => {
             status: "FAILED",
             message: "Empty credentials"
         });
-    } else {
-        User.find({username})
-            .then(data => {
-                if (data.length) {
-                    const hashedPassword = data[0].password;
-                    console.log("USER FOUND:", data[0]);
-                    console.log("PASSWORD IN DB:", data[0].password);
-                    console.log("PASSWORD FROM USER:", password);
-                    bcrypt.compare(password, hashedPassword).then(result => {
-                        if (result) {
-                            return res.json({
-                                status: "SUCCESS",
-                                message: "Login successful",
-                                userId: data[0]._id
-                            });
-                        } else {
-                            return res.json({
-                                status: "FAILED",
-                                message: "Invalid password entered"
-                            });
-                        }
-                    })
-                    .catch(err => {
-                        return res.json({
-                            status: "FAILED",
-                            message: "An error occurred while comparing passwords"
-                        });
+    }
+
+    User.findOne({ username })
+        .then(user => {
+            if (!user) {
+                return res.json({
+                    status: "FAILED",
+                    message: "User not found"
+                });
+            }
+
+            console.log("USER FOUND:", user);
+            console.log("PASSWORD IN DB:", user.password);
+            console.log("PASSWORD FROM USER:", password);
+
+            bcrypt.compare(password, user.password).then(result => {
+                if (result) {
+                    return res.json({
+                        status: "SUCCESS",
+                        message: "Login successful",
+                        userId: user._id
                     });
                 } else {
                     return res.json({
                         status: "FAILED",
-                        message: "Invalid credentials entered"
+                        message: "Invalid password entered"
                     });
                 }
             })
-            .catch(err => {
-                return res.json({
-                   status: "FAILED",
-                   message: "An error occurred while checking for existing user"
+                .catch(err => {
+                    return res.json({
+                        status: "FAILED",
+                        message: "An error occurred while comparing passwords"
+                    });
                 });
-            })
-    }
+        })
+        .catch(err => {
+            console.log(err);
+            return res.json({
+                status: "FAILED",
+                message: "DB error"
+            });
+        })
 })
 
 module.exports = router;

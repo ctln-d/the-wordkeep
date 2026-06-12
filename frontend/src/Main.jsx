@@ -19,12 +19,17 @@ function Main() {
     useEffect(() => {
         const userId = localStorage.getItem("userId");
         console.log("USER ID:", userId);
+        if(!userId) return;
 
         fetch(`http://localhost:3001/pages/getPages?userId=${userId}`)
             .then(res => res.json())
             .then(data => {
-                if (data.status === "SUCCESS") {
-                    setPages(data.pages);
+                if (data.status === "SUCCESS" && Array.isArray(data.pages)) {
+                    if (data.pages.length > 0) {
+                        setPages([...data.pages]);
+                    } else {
+                        setPages(basePages);
+                    }
                 }
             })
             .catch(err => console.log(err));
@@ -57,6 +62,12 @@ function Main() {
         };
 
         const newPages = [...pages];
+        if (newPages.length === 0) {
+            newPages.push(
+                { id: 1, words: [] },
+                { id: 2, words: [] }
+            );
+        }
         const lastFullPage = newPages[newPages.length - 2];  // second to last
         const lastPage = newPages[newPages.length - 1];
 
@@ -89,7 +100,11 @@ function Main() {
                 pages: newPages
             })
         }).then(res => res.json())
-            .then(data => console.log("SAVE RESULT:", data))
+            .then(data => {
+                if (data.status === "SUCCESS" && Array.isArray(data.pages)) {
+                    setPages([...data.pages]);
+                }
+            })
             .catch(err => console.log(err));
     }
 

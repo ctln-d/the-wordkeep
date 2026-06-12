@@ -62,6 +62,9 @@ const Page = React.forwardRef(({ words, onWordClick, scale, id }, ref) => {
 })
 
 function BookViewer({ shiftedLeft, shiftedRight, onWordClick, pages, bookHeight, bookWidth, scale }) {
+    console.log("BOOKVIEWER PGS:", pages);
+    console.log("IS ARRAY:", Array.isArray(pages));
+
     const book = useRef()
 
     return (
