@@ -18,7 +18,7 @@ function Login() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.post("/user/login", {
+        axios.post("http://localhost:3001/user/login", {
             username,
             password
         })

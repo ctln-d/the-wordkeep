@@ -77,7 +77,7 @@
 }
 .right-panel {
     width: 0;
-    overflow: hidden;
+    overflow-y: scroll;
     opacity: 0;
     transition: width 0.5s ease, opacity 0.4s ease;
     background: #EBE4CF;
@@ -92,7 +92,7 @@
 
 }
 
-.add-btn {
+.main-btn {
     background-color: #A1916F;
     border: 1px solid black;
     bottom: 56px;
@@ -101,7 +101,7 @@
     position: absolute;
     padding: 10px 22px;
 }
-.add-btn:hover {
+.main-btn:hover {
     background-color: #D9D4C0;
 }
 .close-btn {
@@ -186,4 +186,38 @@
 .search-error {
     color: black;
     font-family: "Times New Roman", Times, serif;
+}
+
+.word-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+.word-input {
+    border: 1px solid black;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 17px;
+    padding: 7px;
+    width: 85%;
+    background-color: #D9D4C0;
+    text-align: left;
+    padding-left: 9px;
+}
+#source-input {
+
+}
+#notes-input {
+    height: 120px;
+    resize: none;
+}
+
+.delete-btn {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 15px;
+    border: none;
+    background-color: transparent;
+}
+.delete-btn:hover {
+    text-decoration: underline;
 }

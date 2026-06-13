@@ -10,7 +10,7 @@ const bcrypt = require("bcrypt");
 // sign up
 router.post("/signup", (req, res) => {
     let {username, email, password} = req.body;
-    username = username.trim();
+    username = username.trim().toLowerCase();
     email = email.trim();
     password = password.trim();
 
@@ -20,7 +20,7 @@ router.post("/signup", (req, res) => {
             message: "Empty input fields"
         });
     // change to accommodate username
-    } else if (!/^[a-zA-Z ]*$/.test(username)) {
+    } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
         return res.json({
             status: "FAILED",
             message: "Invalid username entered"

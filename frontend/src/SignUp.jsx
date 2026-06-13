@@ -19,7 +19,7 @@ function SignUp() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.post("/user/signup", {
+        axios.post("http://localhost:3001/user/signup", {
             username,
             email,
             password

@@ -10,6 +10,8 @@ function Main() {
     const [selectedWord, setSelectedWord] = useState(null);
     const [pages, setPages] = useState(basePages);
     const [foundWord, setFoundWord] = useState(null);
+    const [source, setSource] = useState("");
+    const [notes, setNotes] = useState("");
 
     const bookHeight = Math.min(window.innerHeight * 0.85, 743);
     const bookWidth = bookHeight * (542 / 743);
@@ -46,6 +48,14 @@ function Main() {
     function handleRightClose() {
         setPanelRightOpen(false);
         setSelectedWord(null);    // clear word when panel closes
+    }
+
+    function handleSourceChange() {
+        setSource(event.target.value);
+    }
+
+    function handleNotesChange() {
+        setNotes(event.target.value);
     }
 
     function handleAddWord(output) {
@@ -90,7 +100,7 @@ function Main() {
 
         const userId = localStorage.getItem("userId");
 
-        fetch("/pages/savePages", {
+        fetch("http://localhost:3001/pages/savePages", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -130,7 +140,7 @@ function Main() {
                     display: "flex",
                     justifyContent: "center",
                     marginTop: "auto"}}>
-                    <button className="add-btn" onClick={addWord}>add</button>
+                    <button className="main-btn" onClick={addWord}>add</button>
                 </div>
             </div>
 
@@ -164,6 +174,25 @@ function Main() {
                             ) : (
                                 <p>{selectedWord.definitions[0]}</p>
                             )}
+                        </div>
+                        <div className="word-inputs">
+                            <input
+                                type="text"
+                                value={source}
+                                onChange={handleSourceChange}
+                                placeholder="source (e.g. book, film, song)"
+                                className="word-input"
+                                id="source-input"
+                            />
+                            <textarea
+                                value={notes}
+                                onChange={handleNotesChange}
+                                placeholder="notes (e.g. something to associate the word with)"
+                                className="word-input"
+                                id="notes-input"
+                            />
+                            <button className="main-btn">save</button>
+                            <button className="delete-btn">delete</button>
                         </div>
                     </div>
                 )}
