@@ -28,7 +28,7 @@ The Wordkeep is a tool to collect words and their definitions using the Merriam-
 5. Type in a word in the search bar and press the "enter" key. A message will show if the word is not supported by this dictionary ("No definition found.").
 6. If the word exists, click the "add" button to add it to the book. 
 7. To revisit the definition of a word in the book, simply click on the word on the page.
-8. To add a log the source or write a note, type in the "source" or "notes" boxes. Be sure to click "save".
+8. To add a log the source or write a note, type in the "source" or "notes" boxes. Be sure to wait for the message showing "saved." before exiting.
 9. To delete a word, press "delete" under the "save" button.
 10. Click or drag the page corners to turn the page, if applicable. No new pages will be available until the existing pages are full.
 

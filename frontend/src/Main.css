@@ -195,6 +195,11 @@
     gap: 10px;
     align-items: center;
 }
+.save-status {
+    font-family: "Times New Roman", Times, serif;
+    color: #D9D4C0;
+    margin: 5px;
+}
 .word-input {
     border: 1px solid black;
     font-family: "Times New Roman", Times, serif;

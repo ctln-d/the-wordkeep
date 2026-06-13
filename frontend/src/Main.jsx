@@ -12,6 +12,7 @@ function Main() {
     const [foundWord, setFoundWord] = useState(null);
     const [source, setSource] = useState("");
     const [notes, setNotes] = useState("");
+    const [saveStatus, setSaveStatus] = useState("");
 
     const bookHeight = Math.min(window.innerHeight * 0.85, 743);
     const bookWidth = bookHeight * (542 / 743);
@@ -37,6 +38,65 @@ function Main() {
             .catch(err => console.log(err));
     }, []);
 
+    // autosave word inputs
+    useEffect(() => {
+        if (!selectedWord) return;
+
+        if (
+            source === (selectedWord.userInputs?.source || "") &&
+            notes === (selectedWord.userInputs?.notes || "")
+        ) {
+            return;
+        }
+
+        const timeoutId = setTimeout(() => {
+            const userId = localStorage.getItem("userId");
+
+            fetch("/pages/savePages", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    userId,
+                    wordId: selectedWord.id,
+                    source,
+                    notes
+                })
+            }).then(res => res.json())
+                .then(data => {
+                    if (data.status === "SUCCESS") {
+                        setPages(prev =>
+                            prev.map(page=> ({
+                                ...page,
+                                words: page.words.map(word =>
+                                    word.id === selectedWord.id
+                                        ? {
+                                            ...word,
+                                            userInputs: {
+                                                ...word.userInputs,
+                                                source,
+                                                notes
+                                            }
+                                        }
+                                        : word
+                                )
+                            }))
+                        );
+
+                        setSaveStatus("saved.");
+                        setTimeout(() => {
+                            setSaveStatus("");
+                        }, 2000);
+                    }
+                }).catch(err => {
+                    console.log(err);
+                    setSaveStatus("failed to save.")
+                });
+        }, 1000);
+        return () => clearTimeout(timeoutId);
+    }, [source, notes]);
+
     // runs when a word is clicked
     // recieves word object
     function handleWordClick(wordObj) {
@@ -55,10 +115,12 @@ function Main() {
 
     function handleSourceChange(e) {
         setSource(e.target.value);
+        setSaveStatus("saving...");
     }
 
     function handleNotesChange(e) {
         setNotes(e.target.value);
+        setSaveStatus("saving...");
     }
 
     function wordExists(word) {
@@ -296,6 +358,11 @@ function Main() {
                             )}
                         </div>
                         <div className="word-inputs">
+                            {saveStatus && (
+                                <div className="save-status">
+                                    {saveStatus}
+                                </div>
+                            )}
                             <input
                                 type="text"
                                 value={source}
@@ -311,7 +378,6 @@ function Main() {
                                 className="word-input"
                                 id="notes-input"
                             />
-                            <button className="main-btn" id="save-btn" onClick={saveWord}>save</button>
                             <button className="delete-btn" onClick={deleteWord}>delete</button>
                         </div>
                     </div>
