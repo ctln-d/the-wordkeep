@@ -23,7 +23,7 @@ function Main() {
         console.log("USER ID:", userId);
         if(!userId) return;
 
-        fetch(`/pages/getPages?userId=${userId}`)
+        fetch(`http://localhost:3001/pages/getPages?userId=${userId}`)
             .then(res => res.json())
             .then(data => {
                 if (data.status === "SUCCESS" && Array.isArray(data.pages)) {
@@ -53,12 +53,12 @@ function Main() {
         setSelectedWord(null);    // clear word when panel closes
     }
 
-    function handleSourceChange() {
-        setSource(event.target.value);
+    function handleSourceChange(e) {
+        setSource(e.target.value);
     }
 
-    function handleNotesChange() {
-        setNotes(event.target.value);
+    function handleNotesChange(e) {
+        setNotes(e.target.value);
     }
 
     function wordExists(word) {
@@ -80,6 +80,7 @@ function Main() {
         }
 
         const newWord = {
+            id: foundWord.id,
             word: foundWord.word,
             partOfSpeech: foundWord.partOfSpeech,
             definitions: foundWord.definitions,
@@ -139,21 +140,76 @@ function Main() {
     function saveWord() {
         if (!selectedWord) return;
 
+        const userId = localStorage.getItem("userId");
+
+        fetch("http://localhost:3001/pages/savePages", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                userId,
+                wordId: selectedWord.id,
+                source,
+                notes
+            })
+        }).then(res => res.json())
+            .then(data => {
+                if (data.status === "SUCCESS") {
+                    setPages(prev =>
+                        prev.map(page => ({
+                            ...page,
+                            words: page.words.map(word =>
+                                word.id === selectedWord.id
+                                    ? {
+                                        ...word,
+                                        userInputs: {
+                                            ...word.userInputs,
+                                            source,
+                                            notes
+                                        }
+                                    }
+                                    :word
+                            )
+                        }))
+                    );
+                }
+            })
+            .catch(err => console.log(err));
+    }
+
+    function deleteWord() {
+        if (!selectedWord) return;
+
         const updatedPages = pages.map(page => ({
             ...page,
-            words: page.words.map(word => {
-                if (word.word !== selectedWord.word) return word;
-
-                return {
-                    ...word,
-                    userInputs: {
-                        ...word.userInputs,
-                        source,
-                        notes
-                    }
-                };
-            })
+            words: page.words.filter(
+                word => word.id !== selectedWord.id
+            )
         }));
+
+        setPages(updatedPages);
+
+        const userId = localStorage.getItem("userId");
+
+        fetch("http://localhost:3001/pages/savePages", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                userId,
+                pages: updatedPages
+            })
+        }).then(res => res.json())
+            .then(data => {
+                if (data.status === "SUCCESS") {
+                    setPages(data.pages);
+                }
+            })
+            .catch(err => console.log(err));
+
+        handleRightClose();
     }
 
     return (
@@ -230,7 +286,7 @@ function Main() {
                                 id="notes-input"
                             />
                             <button className="main-btn" id="save-btn" onClick={saveWord}>save</button>
-                            <button className="delete-btn">delete</button>
+                            <button className="delete-btn" onClick={deleteWord}>delete</button>
                         </div>
                     </div>
                 )}

@@ -95,7 +95,7 @@ function BookViewer({ shiftedLeft, shiftedRight, onWordClick, pages, bookHeight,
                 disableFlipByClick={true}
                 ref={book}
             >
-                {pages.map(page => (
+                {Array.isArray(pages) && pages.map(page => (
                     <Page
                         key={page.id}
                         id={page.id}

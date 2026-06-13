@@ -45,6 +45,7 @@ app.get("/define", async (req, res) => {
         }
 
         res.json({
+            id: crypto.randomUUID(),
             word: entry.meta.id.split(":")[0],
             type: "definition",
             partOfSpeech: entry.fl,

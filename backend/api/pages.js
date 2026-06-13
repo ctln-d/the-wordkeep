@@ -62,13 +62,38 @@ router.post("/addWord", (req, res) => {
         userPages.pages = newPages;
         return userPages.save();
     }).then (saved => {
-        res.json({
+        return res.json({
             status: "SUCCESS",
             pages: saved.pages
         });
     }).catch(err => {
         console.log(err);
-        res.json({ status: "FAILED" });
+        return res.json({ status: "FAILED" });
+    });
+});
+
+// save word
+router.post("/saveWord", (req, res) => {
+    const { userId, wordId, source, notes } = req.body;
+
+    Pages.updateOne(
+        { userId },
+        {
+            $set: {
+                "pages.$[].words.$[w].userInputs.source": source,
+                "pages.$[].words.$[w].userInputs.notes": notes
+            }
+        },
+        {
+            arrayFilters: [
+                { "w.id": wordId }
+            ]
+        }
+    ).then(result => {
+        return res.json({ status: "SUCCESS", result });
+    }).catch(err => {
+        console.log(err);
+        return res.json({ status: "FAILED" });
     });
 });
 
