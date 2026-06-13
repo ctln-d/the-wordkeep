@@ -52,7 +52,7 @@ function Main() {
         const timeoutId = setTimeout(() => {
             const userId = localStorage.getItem("userId");
 
-            fetch("/pages/savePages", {
+            fetch("/pages/saveWord", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

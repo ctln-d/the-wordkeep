@@ -130,6 +130,7 @@ router.post("/savePages", (req, res) => {
        { pages },
        { upsert: true, new: true }
    ).then(result => {
+       console.log("SAVE RESPONSE:", result);
        return res.json({ status: "SUCCESS"});
    }).catch(err => {
        console.log(err)
