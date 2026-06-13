@@ -197,8 +197,10 @@
 }
 .save-status {
     font-family: "Times New Roman", Times, serif;
-    color: #D9D4C0;
+    color: black;
+    text-align: right;
     margin: 5px;
+    font-size: 15px;
 }
 .word-input {
     border: 1px solid black;
