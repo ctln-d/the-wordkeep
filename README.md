@@ -32,6 +32,11 @@ The Wordkeep is a tool to collect words and their definitions using the Merriam-
 9. To delete a word, press "delete" under the "save" button.
 10. Click or drag the page corners to turn the page, if applicable. No new pages will be available until the existing pages are full.
 
+
+# AI Usage
+
+This project was developed with occasional assistance from AI tools for debugging and learning/understanding backend concepts.
+
 # Contributing
 
 ## Cloning and Installation
