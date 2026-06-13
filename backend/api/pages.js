@@ -3,6 +3,75 @@ const router = express.Router();
 
 const Pages = require("../models/Pages");
 
+// add word
+router.post("/addWord", (req, res) => {
+    const { userId, newWord } = req.body;
+
+    Pages.findOne({
+        userId,
+        pages: {
+            $elemMatch: {
+                words: {
+                    $elemMatch: {
+                        word: newWord.word
+                    }
+                }
+            }
+        }
+    }).then(existing => {
+        if (existing) {
+            return res.json({
+                status: "FAILED",
+                message: "You saved this word already"
+            })
+        }
+
+        return Pages.findOne({ userId });
+    }).then(userPages => {
+        if (!userPages) {
+            userPages = newPages ({
+                userId,
+                pages: [
+                    { id: 1, words: [] },
+                    { id: 2, words: [] }
+                ]
+            });
+        }
+
+        const newPages = userPages.pages;
+
+        const lastFullPage = newPages[newPages.length - 2];
+        const lastPage = newPages[newPages.length - 1];
+
+        if (lastFullPage.words.length < 13) {
+            lastFullPage.words.push(newWord);
+        } else if (lastPage.words.length < 13) {
+            lastPage.words.push(newWord);
+        } else {
+            newPages.push({
+                id: newPages.length + 1,
+                words: [newWord]
+            });
+
+            newPages.push({
+                id: newPages.length + 1,
+                words: []
+            });
+        }
+
+        userPages.pages = newPages;
+        return userPages.save();
+    }).then (saved => {
+        res.json({
+            status: "SUCCESS",
+            pages: saved.pages
+        });
+    }).catch(err => {
+        console.log(err);
+        res.json({ status: "FAILED" });
+    });
+});
+
 // GET
 router.get("/getPages", (req, res) => {
    const userId = req.query.userId;

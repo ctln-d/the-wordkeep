@@ -45,10 +45,10 @@ app.get("/define", async (req, res) => {
         }
 
         res.json({
-            type: "definition",
             word: entry.meta.id.split(":")[0],
+            type: "definition",
             partOfSpeech: entry.fl,
-            definitions: entry.shortdef
+            definitions: entry.shortdef,
         })
     } catch (error) {
         res.status(500).json({error: "API request failed"})

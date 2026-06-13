@@ -188,6 +188,7 @@
     font-family: "Times New Roman", Times, serif;
 }
 
+
 .word-inputs {
     display: flex;
     flex-direction: column;
@@ -210,6 +211,10 @@
 #notes-input {
     height: 120px;
     resize: none;
+}
+
+#save-btn {
+    position: static;
 }
 
 .delete-btn {

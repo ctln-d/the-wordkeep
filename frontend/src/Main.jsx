@@ -43,6 +43,9 @@ function Main() {
         setSelectedWord(wordObj);  // save clicked word
         setPanelRightOpen(true);
         setPanelLeftOpen(false);
+
+        setSource(wordObj.userInputs?.source || "");
+        setNotes(wordObj.userInputs?.notes || "");
     }
 
     function handleRightClose() {
@@ -58,6 +61,12 @@ function Main() {
         setNotes(event.target.value);
     }
 
+    function wordExists(word) {
+        return pages.some(page =>
+            page.words.some(w => w.word === word)
+        );
+    }
+
     function handleAddWord(output) {
         setFoundWord(output);
     }
@@ -65,10 +74,19 @@ function Main() {
     function addWord() {
         if (!foundWord) return;
 
+        if (wordExists(foundWord.word)) {
+            // add alert msg
+            return;
+        }
+
         const newWord = {
             word: foundWord.word,
             partOfSpeech: foundWord.partOfSpeech,
-            definitions: foundWord.definitions
+            definitions: foundWord.definitions,
+            userInputs: {
+                source: "",
+                notes: ""
+            }
         };
 
         const newPages = [...pages];
@@ -116,6 +134,26 @@ function Main() {
                 }
             })
             .catch(err => console.log(err));
+    }
+
+    function saveWord() {
+        if (!selectedWord) return;
+
+        const updatedPages = pages.map(page => ({
+            ...page,
+            words: page.words.map(word => {
+                if (word.word !== selectedWord.word) return word;
+
+                return {
+                    ...word,
+                    userInputs: {
+                        ...word.userInputs,
+                        source,
+                        notes
+                    }
+                };
+            })
+        }));
     }
 
     return (
@@ -191,7 +229,7 @@ function Main() {
                                 className="word-input"
                                 id="notes-input"
                             />
-                            <button className="main-btn">save</button>
+                            <button className="main-btn" id="save-btn" onClick={saveWord}>save</button>
                             <button className="delete-btn">delete</button>
                         </div>
                     </div>
