@@ -23,7 +23,7 @@ function Main() {
         console.log("USER ID:", userId);
         if(!userId) return;
 
-        fetch(`http://localhost:3001/pages/getPages?userId=${userId}`)
+        fetch(`/pages/getPages?userId=${userId}`)
             .then(res => res.json())
             .then(data => {
                 if (data.status === "SUCCESS" && Array.isArray(data.pages)) {
@@ -119,7 +119,7 @@ function Main() {
 
         const userId = localStorage.getItem("userId");
 
-        fetch("http://localhost:3001/pages/savePages", {
+        fetch("/pages/savePages", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -142,7 +142,7 @@ function Main() {
 
         const userId = localStorage.getItem("userId");
 
-        fetch("http://localhost:3001/pages/savePages", {
+        fetch("/pages/savePages", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -181,18 +181,19 @@ function Main() {
     function deleteWord() {
         if (!selectedWord) return;
 
-        const updatedPages = pages.map(page => ({
-            ...page,
-            words: page.words.filter(
-                word => word.id !== selectedWord.id
-            )
-        }));
+        const allWords = (pages || []).flatMap(page => page.words);
+
+        const remainingWords = allWords.filter(
+            word => word.id !== selectedWord.id
+        );
+
+        const updatedPages = repackPages(remainingWords);
 
         setPages(updatedPages);
 
         const userId = localStorage.getItem("userId");
 
-        fetch("http://localhost:3001/pages/savePages", {
+        fetch("/pages/savePages", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -203,13 +204,38 @@ function Main() {
             })
         }).then(res => res.json())
             .then(data => {
-                if (data.status === "SUCCESS") {
+                if (Array.isArray(data.pages)) {
                     setPages(data.pages);
                 }
             })
             .catch(err => console.log(err));
 
         handleRightClose();
+    }
+
+    function repackPages(words) {
+        const newPages = [];
+
+        for (let i = 0; i < words.length; i += 13) {
+            newPages.push({
+                id: newPages.length + 1,
+                words: words.slice(i, i + 13)
+            });
+        }
+
+        if (newPages.length === 0) {
+            newPages.push(
+                { id: 1, words: [] },
+                { id: 2, words: [] }
+            );
+        } else if (newPages.length % 2 !== 0) {
+            newPages.push({
+                id: newPages.length + 1,
+                words: []
+            });
+        }
+
+        return newPages;
     }
 
     return (
